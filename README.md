@@ -1,11 +1,3 @@
-# Github Pages
-**The site doesn't have an `index.html`, so you'll be taken to this README if you try visit it.**
-
-Go to one of the following:
-- [Cashbuilder](https://adamandom.github.io/Maitei-Chase/cb.html)
-- [Head to Head](https://adamandom.github.io/Maitei-Chase/hth.html)
-- [Final Chase](https://adamandom.github.io/Maitei-Chase/fc.html)
-
 # Set Up
 Here are the steps required to set the app up:
 - Set the names of the Player and Chaser in `./js/all/definitions.js`
