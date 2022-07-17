@@ -1,0 +1,617 @@
+#main_section
+{
+  width: 80%;
+}
+
+#main_section_content 
+{
+  position: relative;
+  transition: 500ms;
+  width: 100%;
+}
+
+/******************************************
+*     Question Text
+******************************************/
+#question_container 
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  color: #fff;
+  font-size: 3em;
+  width: 100%;
+  height: 100%;
+  max-height: 20%;
+  text-align: center;
+  padding: 0.25em 0;
+
+  margin-bottom: 0.25em;
+
+  background: var(--gradientBlue);
+  border: .125em rgb(188, 239, 246) solid;
+  box-shadow: inset 0.0125em .025em 0.25em rgb(88, 210, 255);
+  border-radius: 0.25em;
+
+}
+
+#question
+{
+  text-shadow: 0.075em 0.075em 0 rgb(1, 8, 53);
+  padding: 0 0.5em;
+}
+
+/******************************************
+*     Answer Boxes
+******************************************/
+#answer_field_container
+{
+  display: flex;
+  position: relative;
+
+  justify-content: space-evenly;
+  text-align: center;
+  margin: auto;
+  gap: 0.5em;
+  font-size: 1.5em;
+  width: 100%;
+  color: #fff;
+
+  // transition: 500ms;
+  height: 2.5em;
+}
+
+.answer_field 
+{
+  /* remove default button styles */
+  position: relative;
+
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: inherit;
+  outline: inherit;
+
+  width: 100%;
+  background: var(--gradientAnswerField);
+  background-color:rgb(34, 105, 227);
+
+  border: .2em rgb(188, 239, 246) solid;
+  border-radius: 0.3em;
+  box-shadow: inset 0.0125em .025em 0.5em rgb(193, 255, 251);
+  
+}
+.answer_field::before
+{
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 0.5em 0.75em;
+  font-size: 1.25em;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#slot_a::before { content: "a"; }
+#slot_b::before { content: "b"; }
+#slot_c::before { content: "c"; }
+
+
+/******************************************
+*     Buzz Ins
+******************************************/
+#name_container
+{
+  position: relative;
+  text-align: center;
+  font-size: 1.5em;
+  
+  display: flex;
+  justify-content: space-between;
+  
+  text-align: center;
+
+  height: 2.5em;
+  // ---
+  width: 100%;
+  margin-bottom: 0.5em;
+
+  width: 100%;
+
+}
+
+.buzz_in
+{
+  height: 100%;
+  min-width: 20%;
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 2rem;
+  padding: 0 1rem;
+}
+
+.step
+{
+  height: 100%;
+  width: calc(100% /7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  background: rgb(26, 23, 46);
+  border: .125em rgb(53, 46, 98) solid;
+  border-radius: 0.3em;
+  box-shadow: 
+    inset 0.0125em .025em 0.5em rgb(46, 40, 82),
+    0 0 0.5em rgb(51, 44, 97);
+
+  color: #fff;
+
+  text-shadow: 0.075em 0.075em 0 rgb(1, 8, 53);
+
+}
+
+.step_cash_input, .settings_input
+{
+  outline: none;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 2em;
+  text-align: center;
+  text-shadow: inherit;
+  width: 100%;
+}
+.step_cash_input::before
+{
+  content: "£";
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  border:1px solid #f30;
+  
+}
+
+.prev_chaser
+{
+  background: rgb(107, 19, 18);
+  border: .125em rgb(90, 18, 12) solid;
+  border-radius: 0.3em;
+  box-shadow: 
+    inset 0.0125em .025em 0.5em rgb(80, 9, 9),
+    0 0 0.5em rgb(139, 2, 0);
+
+}
+.chaser_triangle
+{
+  border-top: 1rem solid transparent;
+  border-bottom: 1rem solid transparent; 
+  border-left: 1.5rem solid rgb(80, 9, 9); 
+}
+
+.board_player
+{
+  background: var(--gradientBlue);
+  border: .125em rgb(18, 104, 233) solid;
+  border-radius: 0.3em;
+  box-shadow: 
+    inset 0.0125em .025em 0.5em rgb(54, 128, 255),
+    0 0 0.5em rgb(41, 109, 192);
+
+  text-shadow: 0.075em 0.075em 0 rgb(1, 8, 53);
+}
+
+.board_chaser
+{
+  background: var(--gradientRed);
+  border: .125em rgb(255, 32, 32) solid;
+  border-radius: 0.3em; 
+  box-shadow: 
+      inset 0.0125em .025em 0.5em rgb(255, 56, 42),
+      0 0 0.5em rgb(231, 2, 90)
+    ;
+
+  text-shadow: 0.075em 0.075em 0 rgb(140, 11, 56);
+}
+
+
+.player
+{
+  background: var(--gradientBlue);
+  border: .125em rgb(18, 104, 233) solid;
+  border-radius: 0.3em;
+  box-shadow: 
+    inset 0.0125em .025em 0.5em rgb(54, 128, 255),
+    0 0 0.5em rgb(41, 109, 192);
+
+  text-shadow: 0.075em 0.075em 0 rgb(1, 8, 53);
+}
+
+.chaser
+{
+  background: var(--gradientRed);
+  border: .125em rgb(255, 32, 32) solid;
+  border-radius: 0.3em; 
+  box-shadow: 
+      inset 0.0125em .025em 0.5em rgb(255, 56, 42),
+      0 0 0.5em rgb(231, 2, 90)
+    ;
+
+  text-shadow: 0.075em 0.075em 0 rgb(140, 11, 56);
+}
+
+/******************************************
+*     Animations Keyframes
+******************************************/
+@keyframes chaserAnswerReveal 
+{
+  to {
+    border-color: rgb(146, 9, 135);
+    box-shadow: 
+      inset 0.0125em .025em 0.5em rgb(96, 7, 98),
+      0 0 0.5em rgb(129, 4, 77)
+    ;
+  }
+  from {
+    border-color: rgb(255, 32, 32);
+    box-shadow: 
+      inset 0.0125em .025em 0.5em rgb(255, 56, 42),
+      0 0 1em rgb(231, 2, 90)
+    ;
+  }
+}
+
+@keyframes correctAnswerReveal 
+{
+  from {
+    color:rgb(143, 255, 188);
+    background-color: #fff;
+    box-shadow: 
+      inset 0.0125em .025em 0.5em #fff,
+      0 0 1em rgb(216, 255, 213)
+    ;
+  }
+  to {
+    color: rgb(7, 53, 72);
+    background-color: rgb(69, 255, 134);
+    border-color: rgb(69, 255, 134);
+    box-shadow: 
+    inset 0.0125em .025em 0.5em rgb(26, 241, 166),
+    0 0 0.75em rgb(102, 255, 181)
+  ;
+  }
+}
+
+@keyframes playerAnswerReveal 
+{
+  from {
+    color:rgb(147, 223, 243);
+    background-color: rgb(189, 237, 255);
+    box-shadow: 
+      inset 0.0125em .025em 0.5em rgb(124, 199, 232),
+      0 0 1em rgb(219, 244, 255)
+    ;
+  }
+  to {
+    color: rgb(25, 7, 72);
+    background-color: rgb(87, 235, 255);
+    border-color: rgb(135, 235, 255);
+    box-shadow: 
+    inset 0.0125em .025em 0.5em rgb(47, 217, 255),
+    0 0 0.75em rgb(102, 184, 255)
+  ;
+  }
+}
+
+@keyframes chaser_victory {
+  from {
+    background: rgb(107, 19, 18);
+    border: .125em rgb(255, 32, 32) solid;
+    box-shadow: 
+      inset 0.0125em .025em 0.5em rgb(80, 9, 9),
+      0 0 0.5em rgb(139, 2, 0);
+  }
+  to {
+    background: rgb(255, 32, 32);
+    border: .125em rgb(255, 32, 32) solid;
+    box-shadow: 
+        inset 0.0125em .025em 0.5em rgb(255, 56, 42),
+        0 0 0.5em rgb(231, 2, 90)
+      ;
+  }
+}
+
+@keyframes player_victory {
+  from {
+    background: rgb(64, 26, 189);
+    border: .125em rgb(64, 26, 189) solid;
+    border-radius: 0.3em;
+    box-shadow: 
+      inset 0.0125em .025em 0.5em rgb(64, 26, 189),
+      0 0 0.5em rgb(64, 26, 189);
+  }
+  to {
+    background: rgb(18, 104, 233);
+    border: .125em rgb(18, 104, 233) solid;
+    border-radius: 0.3em;
+    box-shadow: 
+      inset 0.0125em .025em 0.5em rgb(54, 128, 255),
+      0 0 0.5em rgb(41, 109, 192);
+  }
+}
+
+
+/******************************************
+*     Extra Frontend Stuff
+******************************************/
+#help_modal_button
+{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 1em;
+  border-radius: 100vw;
+  width: 1em;
+  height: 1em;
+  font: inherit;
+  cursor: pointer;
+  border: #fff solid 0.025em;
+  color: #fff;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  bottom: 2.5%;
+  right: 2.5%;
+  opacity: 0.2;
+  transition: opacity 500ms, transform 500ms;
+}
+#help_modal_button:hover
+{
+  opacity: 1;
+  transform: scale(1.5);
+}
+#help_modal_container
+{
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: #01000999;
+  position: absolute;
+  
+  font-family: Arial, Helvetica, sans-serif;
+
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+#help_modal
+{
+  background: var(--gradientBlue);
+  border: .25em rgb(188, 239, 246) solid;
+  box-shadow: inset 0.0125em .025em 0.25em rgb(88, 210, 255);
+  border-radius: 0.25em;
+  
+  height: 60%;
+  width: 40%;
+  color: #fff;
+  
+  h3, h6
+  {
+    text-align: center;
+    padding: 0.5em 0;
+  }
+  h6
+  {
+    font-weight: 400;
+    padding: 0.25em 0;
+  }
+
+}
+
+#key_bindings_list
+{
+  width: 95%;
+  margin: 0 auto;
+  padding: 0.5em 0;
+  list-style-type: none;
+}
+
+.key_bindings_list_item
+{
+  box-shadow: inset 0.0125em .025em 0.25em rgb(88, 210, 255);
+  border-radius: 0.25em;
+  padding: 1em 0.5em;
+  font-size: 0.75em;
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  p
+  {
+    font-size: 1rem;
+  }
+}
+
+#settings_chaserName, #settings_playerName
+{
+  height: 3rem;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.settings_input
+{
+  font-size: 1.5rem;
+  height: 2rem;
+}
+
+#settings_modal_list
+{
+  width: 90%;
+  margin: 0 auto;
+  list-style-type: none;
+  background: var(--gradientBG);
+  padding: 1em 0;
+  border-radius: 1rem;
+
+  li:not(li:last-child)
+  {
+    margin-bottom: 5%;
+  }
+}
+
+
+/******************************************
+*     Choice Classes (add in JS)
+******************************************/
+.player_choice 
+{
+  animation-name: playerAnswerReveal;
+  animation-timing-function: ease-in-out;
+  animation-duration: 150ms;
+  animation-direction: alternate-reverse;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 4;
+
+  background: rgb(87, 235, 255);
+  box-shadow: inset 0.0125em .025em 0.5em rgb(189, 255, 248);
+  color: rgb(35, 37, 98);
+}
+
+.correct_choice 
+{
+  animation-name: correctAnswerReveal;
+  animation-timing-function: ease-in-out;
+  animation-duration: 800ms;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  
+  background: rgb(69, 255, 134);
+  color: rgb(7, 53, 72);
+}
+
+.chaser_choice 
+{
+  animation-name: chaserAnswerReveal;
+  animation-timing-function: ease-in-out;
+  animation-duration: 100ms;
+  animation-direction: alternate-reverse;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 3;
+}
+
+/******************************************
+*     Final Chase
+******************************************/
+#fc_container
+{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  
+  color: #fff;
+  width: 100%;
+  height: 4rem;
+  text-align: center;
+  padding: 0.25em 0;
+
+  margin-bottom: 0.25em;
+
+  background: var(--gradientBlue);
+  border: .25em rgb(188, 239, 246) solid;
+  box-shadow: inset 0.0125em .025em 0.25em rgb(88, 210, 255);
+  border-radius: 0.25em;
+}
+
+.fc_unit
+{
+  border: .125em rgb(188, 239, 246) solid;
+  box-shadow: inset 0.0125em .025em 0.25em rgb(88, 210, 255);
+  border-radius: 0.25em;
+  margin: 0.125em;
+
+  font-size: 1.5em;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: width 200ms;
+}
+
+.fc_current
+{
+  background: rgb(87, 235, 255);
+  box-shadow: inset 0.0125em .025em 0.5em rgb(189, 255, 248);
+  color: rgb(35, 37, 98); 
+
+  animation-name: fcUnitCreated;
+  animation-timing-function: ease-in-out;
+  animation-duration: 800ms;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+/******************************************
+*     Board
+******************************************/
+#board_container
+{
+  position: absolute;
+  top: 5vh;
+  height: 10vh;
+  width: 80%;
+}
+
+#board
+{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 1vw;
+}
+
+.anim_chaser_victory
+{
+  animation-name: chaser_victory;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0ms;
+  animation-iteration-count: 9;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}
+
+.anim_player_victory
+{
+  animation-name: player_victory;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0ms;
+  animation-iteration-count: 9;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}

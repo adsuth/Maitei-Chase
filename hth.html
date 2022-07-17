@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/hth_style.css">
+    <link rel="stylesheet" href="./css/all_style.css">
+    <title>Head to Head</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+
+</head>
+<body class="flex_centered">
+  <style>
+    /* To add a local font */
+    @font-face {
+      font-family: kenyanCoffee;
+      src:url("../fonts/kenyan_coffee.ttf");
+    }
+
+    html
+    {
+      /* Change name here */
+      /* font-family: "Arial", sans-serif; */
+      font-family: kenyanCoffee, sans-serif;
+      /* Change this to change scale across entire site */
+      font-size: 1.5em; 
+    }
+  </style>
+
+  <button id="next_page_button" class="circle_button">
+    <div class="page_triangle next_page"></div>
+  </button>
+  <button id="prev_page_button" class="circle_button">
+    <div class="page_triangle prev_page"></div>
+  </button>
+
+<section id="main_section">
+    <div id="board_container">
+        <div id="board">
+          <div data-step="0" class="step"></div>
+          <div data-step="1" class="step"></div>
+          <div data-step="2" class="step"></div>
+          <div data-step="3" class="step"></div>
+          <div data-step="4" class="step"></div>
+          <div data-step="5" class="step"></div>
+          <div data-step="6" class="step"></div>
+        </div>
+    </div>
+
+    <div id="name_container">
+      <p id="playerName" class="buzz_in player">&nbsp;</p>
+      <p id="chaserName" class="buzz_in chaser">&nbsp;</p>
+    </div>
+
+    <div id="main_section_content">
+      <div id="question_container">
+        <h2 id="question">&nbsp;</h2>
+      </div>
+    
+      <div id="answer_field_container" >
+        <button class="answer_field" id="slot_a">&nbsp;</button>
+        <button class="answer_field" id="slot_b">&nbsp;</button>
+        <button class="answer_field" id="slot_c">&nbsp;</button>
+      </div>
+    </div>
+    
+  </section>
+
+  
+
+  <div id="bg_container">
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+  </div>
+
+  <script src="./js/all/definitions.js" defer></script>
+
+  <script src="./js/all/background.js" defer></script>
+  <script src="./js/all/sfx.js" defer></script>
+  <script src="./js/hth/hth_definitions.js" defer></script>
+  <script src="./js/hth/hth_display.js"     defer></script>
+  <script src="./js/hth/hth_app.js"         defer></script>
+  <script src="./js/hth/hth_events.js"      defer></script>
+  
+  <!-- comment/ delete from here to remove ? button -->
+  <!-- START -->
+  <button id="help_modal_button" class="circle_button">?</button>
+  <div id="help_modal_container" class="modal_container flex_centered">
+    <section id="help_modal" class="modal">
+      <div class="modal_title">
+        <h3>Key Bindings</h3>
+        <h6>Click <span id="help_modal_close" class="special_text">here</span> to close</h6>
+      </div>
+    <ul id="key_bindings_list"></ul>
+    </section>
+  </div>
+  <!-- END -->
+
+  <!-- comment/ delete from here to remove ... button -->
+  <!-- START -->
+  <button id="settings_modal_button" class="circle_button">...</button>
+  <div id="settings_modal_container" class="modal_container flex_centered">
+    <section id="settings_modal" class="modal">
+      <div class="modal_title">
+        <h3>Change Settings</h3>
+        <h6>Click <span id="settings_modal_close" class="special_text">here</span> to save and close</h6>
+      </div>
+      <ul id="settings_modal_list">
+        <li>
+          <p id="settings_playerName" class="buzz_in player">
+            <input type="text" id="settings_player_name" class="settings_input" autocomplete='off'>
+          </p>
+        </li>
+        <li>
+          <p id="settings_chaserName" class="buzz_in chaser">
+            <input type="text" id="settings_chaser_name" class="settings_input" autocomplete='off'>
+          </p>
+        </li>
+      </ul>  
+    </section>
+  </div>
+  <!-- END -->
+
+  <p id="suggested_action"></p>
+  <script src="./js/all/suggestedAction.js" defer></script>
+
+  <script src="./js/all/help.js" defer></script>
+  <script src="./js/hth/hth_help.js" defer></script>
+
+  <div id="sfx">
+    <audio id="chaserAnswer" preload="auto" src="./sounds/sfx/hth_ChaserAnswer.mp3"></audio>
+    <audio id="chaserBuzz" preload="auto" src="./sounds/sfx/hth_ChaserBuzz.mp3"></audio>
+    <audio id="correctAnswer" preload="auto" src="./sounds/sfx/hth_CorrectAnswer.mp3"></audio>
+    <audio id="playerAnswer" preload="auto" src="./sounds/sfx/hth_PlayerAnswer.mp3"></audio>
+    <audio id="playerBuzz" preload="auto" src="./sounds/sfx/hth_PlayerBuzz.mp3"></audio>
+    <audio id="questionShown" preload="auto" src="./sounds/sfx/hth_QuestionShown.mp3"></audio>
+    <audio id="timeUp" preload="auto" src="./sounds/sfx/hth_TimeUp.mp3"></audio>
+  </div>
+  
+  <!-- all longer SFX -->
+  <div id="bgm">
+    <audio id="buzzCountdown" preload="auto" src="./sounds/bgm/hth_BuzzCountdown.mp3"></audio>
+    <audio id="chaserVictory"   preload="auto" src="./sounds/bgm/all_ChaserCatch.mp3"></audio>
+    <audio id="playerVictory"   preload="auto" src="./sounds/bgm/all_playerWin.mp3"></audio>
+    <audio id="chaserWalk"    preload="auto" src="./sounds/bgm/all_ChaserWalkOn.mp3"></audio>
+    <audio id="theChaseIsOn"  preload="auto" src="./sounds/bgm/all_TheChaseIsOn.mp3"></audio>
+    <audio id="chaserReveal"  preload="auto" loop src="./sounds/bgm/hth_ChaserReveal.mp3"></audio>
+    <audio id="theme"         preload="auto" loop src="./sounds/bgm/hth_Theme.mp3"></audio>
+  </div>
+
+</body>
+</html>

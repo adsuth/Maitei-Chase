@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/cb_style.css">
+    <link rel="stylesheet" href="./css/all_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Cash Builder</title>
+</head>
+
+<body>
+
+  <style>
+    /* To add a local font */
+    @font-face {
+      font-family: kenyanCoffee;
+      src:url("./fonts/kenyan_coffee.ttf");
+    }
+
+    html
+    {
+      /* Change name here */
+      /* font-family: "Arial", sans-serif; */
+      font-family: kenyanCoffee, sans-serif;
+      /* Change this to change scale across entire site */
+      font-size: 1.5em; 
+    }
+  </style>
+
+  <button id="next_page_button" class="circle_button">
+    <div class="page_triangle next_page"></div>
+  </button>
+  <button id="prev_page_button" class="circle_button">
+    <div class="page_triangle prev_page"></div>
+  </button>
+  
+  <main id="cb_main_content" class="main_content">
+
+    <div id="cb_container">
+      <text id="cb_timer" class="timer">1:00</text>
+      <p id="cb_cash" class="big_box">£0.00</p>
+    </div>
+
+  </main>
+  
+  <p id="suggested_action"></p>
+  <script src="./js/all/suggestedAction.js" defer></script>
+
+    <div id="bgm">
+      <audio id="theme"   src="./sounds/bgm/cb_Theme.mp3" preload='true'></audio>
+    </div>
+    <div id="sfx">
+      <audio id="klaxon" src="./sounds/sfx/all_klaxon.mp3" preload='true'></audio>
+      <div id="correct">
+        <audio src="./sounds/sfx/cb_Correct.mp3" preload='true'></audio>
+        <audio src="./sounds/sfx/cb_Correct.mp3" preload='true'></audio>
+        <audio src="./sounds/sfx/cb_Correct.mp3" preload='true'></audio>
+      </div>
+    </div>
+
+  
+
+  <script src="./js/all/definitions.js" defer></script>
+  <script src="./js/all/sfx.js" defer></script>
+  <script src="./js/all/timer.js" defer></script>
+  <script src="./js/all/background.js" defer></script>
+  <script src="./js/all/events.js" defer></script>
+  
+  <script src="./js/cb/cb_definitions.js" defer></script>
+  <script src="./js/cb/cb_app.js" defer></script>
+  <script src="./js/cb/cb_events.js" defer></script>
+
+  <!-- #bg_container>.bg_row*11>.bg_col*20 -->
+  <div id="bg_container">
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+    <div class="bg_row">
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+      <div class="bg_col"></div>
+    </div>
+  </div>
+  
+  <!-- comment/ delete from here to remove ? button -->
+  <!-- START -->
+  <button id="help_modal_button" class="circle_button">?</button>
+  <div id="help_modal_container" class="modal_container flex_centered">
+    <section id="help_modal" class="modal">
+      <div class="modal_title">
+        <h3>Key Bindings</h3>
+        <h6>Click <span id="help_modal_close" class="special_text">here</span> to close</h6>
+      </div>
+      <ul id="key_bindings_list"></ul>
+    </section>
+  </div>
+  <!-- END -->
+  <script src="./js/all/help.js" defer></script>
+  <script src="./js/cb/cb_help.js" defer></script>
+
+
+</body>
+</html>
