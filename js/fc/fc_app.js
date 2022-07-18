@@ -57,7 +57,9 @@ function fc_gameOver( winner = "player" )
   STATE.isChaserRound = false
 
   STATE.fc_gameOver = true
-
+  
+  sfx_stopAllBGM( bgm )
+  
   TIMER.stop()
   timer.classList.remove( "anim_timer_pulse" )
 
@@ -262,5 +264,8 @@ function fc_initApp()
 
 TIMER.timerEndCallback = startChaserRound
 STATE = getDefaultState()
-sfx_initBGM( bgm )
+
+sfx_setVolume( bgm, BGM_VOLUME )
+sfx_setVolume( sfx, SFX_VOLUME )
+
 fc_initApp()
