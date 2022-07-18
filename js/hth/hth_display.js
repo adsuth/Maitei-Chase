@@ -67,32 +67,43 @@ function hth_showCorrectAnswer() {
     sfx_stopAllBGM( bgm )
   }
 
-  if ( ROUND_STATE.playerCorrect )
-  {
-    GAME_STATE.playerPosition++
-    hth_checkBoardPositions()
-  }
-
   ROUND_STATE.correctAnswerShown = true
 
-
-  // for suggested action; just ignore
-  if ( !ROUND_STATE.chaserTimedOut )
+  if ( ROUND_STATE.playerCorrect )
   {
+
+    if ( GAME_STATE.playerPosition + 1 === BOARD_STEPS )
+    {
+      hth_showNext()
+    }
+
     sa_updateSuggestedAction(
-      KEY_BINDS.showChaserSlotA,
-      KEY_BINDS.showChaserSlotB,
-      KEY_BINDS.showChaserSlotC,
+      KEY_BINDS.showNext,
     )
   }
   else
   {
-    ROUND_STATE.roundOver = true
-    if ( !GAME_STATE.gameOver )
+
+    // for suggested action; just ignore
+    if ( !ROUND_STATE.chaserTimedOut )
     {
-      sa_updateSuggestedAction( KEY_BINDS.showNext )
+      sa_updateSuggestedAction(
+        KEY_BINDS.showChaserSlotA,
+        KEY_BINDS.showChaserSlotB,
+        KEY_BINDS.showChaserSlotC,
+      )
     }
+    else
+    {
+      ROUND_STATE.roundOver = true
+      if ( !GAME_STATE.gameOver )
+      {
+        sa_updateSuggestedAction( KEY_BINDS.showNext )
+      }
+    }
+
   }
+
 }
 
 /**
@@ -105,6 +116,8 @@ function hth_showChaserAnswer( slot ) {
   if ( !ROUND_STATE.buzzersOut)          { return }
   if ( !ROUND_STATE.playerBuzzed )       { return }
   if ( !ROUND_STATE.chaserBuzzed )       { return }
+
+  if ( ROUND_STATE.playerCorrect && !ROUND_STATE.playerMoved ) { return }
 
   if ( ROUND_STATE.chaserAnswered )       { return }
 
@@ -127,17 +140,16 @@ function hth_showChaserAnswer( slot ) {
   ROUND_STATE.roundOver = true
 
   ROUND_STATE.chaserCorrect = hth_checkIfChaserWasCorrect()
-  
-  if ( ROUND_STATE.chaserCorrect )
+
+  if ( ROUND_STATE.chaserCorrect && GAME_STATE.chaserPosition + 1 === GAME_STATE.playerPosition )
   {
-    GAME_STATE.chaserPosition++
-    hth_checkBoardPositions()
+    hth_showNext()
   }
 
-  if ( !GAME_STATE.gameOver )
-  {
-    sa_updateSuggestedAction( KEY_BINDS.showNext )
-  }
+  sa_updateSuggestedAction(
+    KEY_BINDS.showNext,
+  )
+  
 }
 
 
@@ -410,6 +422,52 @@ function hth_showNext()
       KEY_BINDS.chaserBuzzIn
     )
   }
+  else if ( ROUND_STATE.correctAnswerShown && ROUND_STATE.playerCorrect && !ROUND_STATE.playerMoved )
+  {
+    ROUND_STATE.playerMoved = true
+    GAME_STATE.playerPosition++
+
+    hth_checkBoardPositions()
+
+    if ( GAME_STATE.playerPosition !== BOARD_STEPS )
+    {
+      sfx_playSFX( playerMove )
+    }
+
+    // for suggested action; just ignore
+    if ( !ROUND_STATE.chaserTimedOut )
+    {
+      sa_updateSuggestedAction(
+        KEY_BINDS.showChaserSlotA,
+        KEY_BINDS.showChaserSlotB,
+        KEY_BINDS.showChaserSlotC,
+      )
+    }
+    else
+    {
+      ROUND_STATE.roundOver = true
+      if ( !GAME_STATE.gameOver )
+      {
+        sa_updateSuggestedAction( KEY_BINDS.showNext )
+      }
+    }
+
+  }
+  else if ( ROUND_STATE.chaserAnswered && ROUND_STATE.chaserCorrect && !ROUND_STATE.chaserMoved )
+  {
+    ROUND_STATE.chaserMoved = true
+
+    GAME_STATE.chaserPosition++
+    hth_checkBoardPositions()
+
+    sfx_playSFX( chaserMove )
+
+    ROUND_STATE.roundOver = true
+    // for suggested action; just ignore
+    sa_updateSuggestedAction( KEY_BINDS.showNext )
+
+  }
+
   else if ( ROUND_STATE.roundOver ){
     hth_nextQuestion()
   }

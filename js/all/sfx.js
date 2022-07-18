@@ -46,13 +46,24 @@ function sfx_stopBGM( tag )
 }
 
 // to make them less deafening
-function sfx_initBGM( container )
+function sfx_setVolume( container, newVolume )
 {
   for ( let tag of container.children )
   {
-    tag.volume = BGM_MAX_VOLUME
+    if ( tag?.children.length > 0 )
+    {
+      for ( let el of tag.children )
+      {
+        el.volume = newVolume
+      }
+    }
+    else
+    {
+      tag.volume = newVolume
+    }
   }
 }
+
 
 function sfx_stopAllBGM( bgmContainer )
 {
@@ -127,12 +138,12 @@ function sfx_unmuteSounds()
     {
       for ( let tag of element.children )
       {
-        tag.volume = SFX_MAX_VOLUME
+        tag.volume = SFX_VOLUME
       } 
     }
     else
     {
-      element.volume = BGM_MAX_VOLUME
+      element.volume = BGM_VOLUME
     }
   }
   for ( let element of bgm.children )
@@ -141,13 +152,36 @@ function sfx_unmuteSounds()
     {
       for ( let tag of element.children )
       {
-        tag.volume = BGM_MAX_VOLUME
+        tag.volume = BGM_VOLUME
       } 
     }
     else
     {
-      element.volume = BGM_MAX_VOLUME
+      element.volume = BGM_VOLUME
     }
   }
   
 }
+
+function initSounds()
+{
+  sfx_volume.value = localStorage.getItem( "SFX_VOLUME" ) ?? SFX_VOLUME
+  bgm_volume.value = localStorage.getItem( "BGM_VOLUME" ) ?? BGM_VOLUME
+}
+
+sfx_volume.addEventListener( "change", ev => {
+  SFX_VOLUME = ev.target.value
+  localStorage.setItem( "SFX_VOLUME", SFX_VOLUME )
+  sfx_setVolume( sfx, SFX_VOLUME )
+} )
+
+bgm_volume.addEventListener( "change", ev => {
+  BGM_VOLUME = ev.target.value 
+  localStorage.setItem( "BGM_VOLUME", BGM_VOLUME )
+  sfx_setVolume( bgm, BGM_VOLUME )
+} )
+
+sfx_volume.addEventListener( "focus", ev => { ev.target.blur() } )
+bgm_volume.addEventListener( "focus", ev => { ev.target.blur() } )
+
+initSounds()

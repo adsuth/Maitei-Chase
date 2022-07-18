@@ -6,6 +6,8 @@
 // SFX Tags
 const sfx = document.getElementById("sfx")
 
+const playerMove    = document.getElementById( "playerMove" )
+const chaserMove    = document.getElementById( "chaserMove" )
 const chaserAnswer  = document.getElementById( "chaserAnswer" )
 const chaserBuzz    = document.getElementById( "chaserBuzz" )
 const correctAnswer = document.getElementById( "correctAnswer" )
@@ -46,7 +48,6 @@ const playerNameInput = document.getElementById("settings_player_name")
 
 // Buzz In Timer
 var BUZZ_IN_TIMER = null
-const BGM_VOLUME = 0.5
 
 // Global Variables
 var GAME_STATE  = {}

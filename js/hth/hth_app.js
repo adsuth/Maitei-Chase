@@ -76,6 +76,9 @@ function hth_getDefaultRoundState()
     playerCorrect: false,
     chaserCorrect: false,
 
+    playerMoved: false,
+    chaserMoved: false,
+
     answersShown: false,
     questionShown: false
   }
@@ -353,5 +356,8 @@ function hth_initApp()
   hth_getCSV()
 }
 
-sfx_initBGM( bgm )
+
+sfx_setVolume( bgm, BGM_VOLUME )
+sfx_setVolume( sfx, SFX_VOLUME )
+
 hth_initApp()

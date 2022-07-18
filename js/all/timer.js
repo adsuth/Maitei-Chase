@@ -15,6 +15,7 @@ class Timer {
     this.maxSeconds = settings?.secs ?? 30
     this.maxMinutes = settings?.mins ?? 1
 
+    this.goBeyondRange = settings?.mins ?? false
     this.timerEndCallback = settings?.timerEndCallback ?? function() {}
     
     this.milliseconds = 0
@@ -87,6 +88,11 @@ class Timer {
       this.minutes++
       this.seconds %= 60
     }
+    if ( this.goBeyondRange && this.seconds > this.maxSeconds )
+    {
+      this.seconds = this.maxSeconds
+    }
+
     this.updateDisplay()
   }
 
@@ -107,7 +113,7 @@ class Timer {
       this.timerEndCallback()
       return 
     }   
-    
+
     this.updateDisplay()
   }
 
@@ -116,7 +122,7 @@ class Timer {
     this.milliseconds -= this.INTERVAL_LENGTH
     
     // time up
-    if (this.minutes <= 0 && this.seconds <= 0) {
+    if (this.minutes <= 0 && this.seconds <= 0 && this.milliseconds <= 0) {
       // end game
       this.stop()
       return this.timerEndCallback()

@@ -69,16 +69,11 @@ KEY_BINDS = {
   },
   silentlyAddStep: {
     keys: [ "ArrowUp" ],
-    description: "Adds Player or Chaser Step quietly depending on round. ",
+    description: "Adds Player step quietly, regardless of whether the timer is running. ",
     action: () => {
-      if ( STATE.isPlayerRound ){
-        addStep()
-      }
-      else {
-        chaser_addStep()
-      }
+      addStep()
     }
-    },
+  },
 
   // chaser steps
   addChaserStep: {
@@ -110,7 +105,7 @@ KEY_BINDS = {
     keys: [ " ", "Space" ],
     description: "Toggles the timer; turns on or off",
     action: () => { 
-      if ( STATE.hth_gameOver ) { return }
+      if ( STATE.gameOver ) { return }
       // returns true if playing, false if stopped
       timer.classList.toggle( "anim_timer_pulse" )
       if ( TIMER.toggle() ) { return sfx_playBGM( finalOST, bgm ) }
@@ -121,7 +116,7 @@ KEY_BINDS = {
     keys: [ "r" ],
     description: "Reset the timer",
     action: () => {
-      if ( STATE.hth_gameOver ) { return }
+      if ( STATE.gameOver ) { return }
       timer.classList.remove( "anim_timer_pulse" )
       TIMER.reset()
       sfx_stopBGM( finalOST )
@@ -134,18 +129,22 @@ KEY_BINDS = {
     keys: [ "+" ],
     description: "Grants an additional 10 seconds to the clock. ",
     action: () => {
-      if ( STATE.hth_gameOver ) { return }
-      TIMER.addTime( 10 )
+      if ( STATE.gameOver ) { return }
+      
+      finalOST.currentTime -= TIMER_INCREMENT
+      TIMER.addTime( TIMER_INCREMENT )
     }
   },
   removeTime: {
     keys: [ "-" ],
     description: "Removes 10 seconds from the clock. ",
     action: () => {
-    if ( STATE.hth_gameOver ) { return }     
-        TIMER.removeTime( 10 )
-      }
-    },
+      if ( STATE.gameOver ) { return }     
+
+      finalOST.currentTime += TIMER_INCREMENT 
+      TIMER.removeTime( TIMER_INCREMENT )
+    } 
+  },
   
   /******************************************
   *     SFX

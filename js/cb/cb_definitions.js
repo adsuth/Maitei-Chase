@@ -10,10 +10,11 @@ const CASH_INCREMENT = 250  // 250 == £2.50
 const CASH_ROLLING_INTERVAL_TIME = 25
 const CASH_ROLLING_MAX_LOOPS = 20
 
-var CASH_ROLLING_INTERVAL = null
-var CB_STATE = {}
+var CB_THEME_STARTUP_TIMEOUT = null
 
-const TIMER_INCREMENT = 10
+var CASH_ROLLING_INTERVAL = null
+var STATE = {}
+
 FADE_DURATION = 500
 
 TIMER = new Timer( "cb_timer", {
@@ -45,6 +46,12 @@ KEY_BINDS = {
     description: `Resets the game; timer, cash, etc. `,
     action: () => {
       sfx_stopAllBGM( cb_bgm )
+      
+      if ( CB_THEME_STARTUP_TIMEOUT ) { 
+        clearTimeout( CB_THEME_STARTUP_TIMEOUT ) 
+        CB_THEME_STARTUP_TIMEOUT = null
+      }
+
       cb_init()
     }
   },
@@ -56,8 +63,17 @@ KEY_BINDS = {
     keys: [ " ", "Space", "Enter" ],
     description: `Toggles timer. Pauses if playing, playing if paused. `,
     action: () => {
-      if ( CB_STATE.hth_gameOver ) { return }
+      if ( STATE.gameOver ) { return }
+      
+      sfx_playBGM( theme, cb_bgm )
+
+      if ( !TIMER.started ) {
+        CB_THEME_STARTUP_TIMEOUT = setTimeout( TIMER.toggle, 1500 )
+        return
+      }
+      
       TIMER.toggle()
+
       if ( TIMER.running ) { sfx_playBGM( theme, cb_bgm ) } 
       else { sfx_pauseBGM( theme ) } 
       sa_updateSuggestedAction( 
@@ -71,23 +87,34 @@ KEY_BINDS = {
     keys: [ "r" ],
     description: `Resets the timer. `,
     action: () => {
-      if ( CB_STATE.hth_gameOver ) { return }
+      if ( STATE.gameOver ) { return }
+
+      if ( CB_THEME_STARTUP_TIMEOUT ) { 
+        clearTimeout( CB_THEME_STARTUP_TIMEOUT ) 
+        CB_THEME_STARTUP_TIMEOUT = null
+      }
+
       TIMER.reset()
       sfx_stopAllBGM( cb_bgm ) 
     }
   },
-  AddTime: {
+  // altering clock
+  addTime: {
     keys: [ "+" ],
-    description: `Adds ${TIMER_INCREMENT} seconds to the clock. `,
+    description: "Grants an additional 10 seconds to the clock. ",
     action: () => {
+      if ( STATE.gameOver ) { return }
+      theme.currentTime -= TIMER_INCREMENT
       TIMER.addTime( TIMER_INCREMENT )
     }
   },
-  RemoveTime: {
+  removeTime: {
     keys: [ "-" ],
-    description: `Removes ${TIMER_INCREMENT} seconds from the clock. `,
+    description: "Removes 10 seconds from the clock. ",
     action: () => {
+      if ( STATE.gameOver ) { return }     
+      theme.currentTime += TIMER_INCREMENT
       TIMER.removeTime( TIMER_INCREMENT )
-    }
+    } 
   },
 }

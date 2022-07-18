@@ -14,7 +14,7 @@
     /* To add a local font */
     @font-face {
       font-family: kenyanCoffee;
-      src:url("../fonts/kenyan_coffee.ttf");
+      src:url("./fonts/kenyan_coffee.ttf");
     }
 
     html
@@ -40,6 +40,15 @@
       <ul id="fc_step_container"></ul>
     </div>
   </section>
+
+  <div id="sfx_volume_sliders">
+    
+    <label for="sfx_volume">SFX</label>
+    <input type="range" name="sfx_volume" id="sfx_volume" class="volume_slider" min="0" max="1" step="0.1">
+    <label for="bgm_volume">BGM</label>
+    <input type="range" name="bgm_volume" id="bgm_volume" class="volume_slider" min="0" max="1" step="0.1">
+
+  </div>
 
   <div id="sfx">
     <audio id="klaxon"      preload="auto"  src="./sounds/sfx/all_klaxon.mp3"></audio>

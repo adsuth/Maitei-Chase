@@ -18,7 +18,7 @@
     /* To add a local font */
     @font-face {
       font-family: kenyanCoffee;
-      src:url("../fonts/kenyan_coffee.ttf");
+      src:url("./fonts/kenyan_coffee.ttf");
     }
 
     html
@@ -201,7 +201,19 @@
   <script src="./js/all/help.js" defer></script>
   <script src="./js/hth/hth_help.js" defer></script>
 
+  <div id="sfx_volume_sliders">
+    
+    <label for="sfx_volume">SFX</label>
+    <input type="range" name="sfx_volume" id="sfx_volume" class="volume_slider" min="0" max="1" step="0.1">
+    <label for="bgm_volume">BGM</label>
+    <input type="range" name="bgm_volume" id="bgm_volume" class="volume_slider" min="0" max="1" step="0.1">
+
+  </div>
+
   <div id="sfx">
+    <audio id="playerMove" preload="auto" src="./sounds/sfx/hth_PlayerMove.mp3"></audio>
+    <audio id="chaserMove" preload="auto" src="./sounds/sfx/hth_ChaserMove.mp3"></audio>
+    
     <audio id="chaserAnswer" preload="auto" src="./sounds/sfx/hth_ChaserAnswer.mp3"></audio>
     <audio id="chaserBuzz" preload="auto" src="./sounds/sfx/hth_ChaserBuzz.mp3"></audio>
     <audio id="correctAnswer" preload="auto" src="./sounds/sfx/hth_CorrectAnswer.mp3"></audio>
