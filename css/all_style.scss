@@ -1,0 +1,745 @@
+* 
+{ 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  // font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--fontMain);  
+}
+
+/******************************************
+*     Global Styles
+******************************************/
+.timer
+{
+  --timer_width: 2.5em;
+
+  display: block;
+  text-align: center;
+  background: var(--gradientAnswerField);
+  position: relative;
+  top: 0;
+  left: calc( 100% - var(--timer_width) );
+  right: 0;
+  font-size: 2.5em;
+  padding: 0.125em 0;
+  width: var(--timer_width);
+
+  color: #fff;
+
+  margin-bottom: 0.125em;
+
+  background: var(--gradientBlue);
+  border: .125em rgb(188, 239, 246) solid;
+  box-shadow: inset 0.0125em .025em 0.25em rgb(88, 210, 255);
+  border-radius: 0.25em;
+}
+
+.content
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.big_box
+{
+  display: flex;
+  flex-wrap: nowrap;
+  
+  min-height: 3rem;
+  padding: 0.25rem 0.25rem;
+  column-gap: 0.125rem;
+  list-style-type: none;
+  
+  background: var(--gradientBlue);
+  color: #fff;
+
+  border: .25rem rgb(188, 239, 246) solid;
+  box-shadow: inset 0.25rem 0.25rem 0.75rem rgb(88, 210, 255);
+  border-radius: 0.5rem;
+}
+
+
+h2
+{
+  font-weight: 400;
+  font-size: 1em;
+}
+
+html 
+{
+  --gradientBG:   linear-gradient( rgb(25, 27, 72), rgb(8, 8, 33) );
+  --gradientRed:  linear-gradient( 270deg, #e04b22, #e32242 );
+  --gradientBlue: linear-gradient( 90deg, rgb(64, 26, 189), rgb(34, 105, 227) );
+  --gradientAnswerField: linear-gradient( 90deg, rgb(50, 7, 149), rgb(7, 37, 123) );
+}
+
+body 
+{
+  background: var(--gradientBG);
+  height: 100vh;
+}
+
+button {
+  background-color: #fff;
+}
+
+#fc_timer {
+  --timer_width: 2.5em;
+
+  display: block;
+  text-align: center;
+  background: var(--gradientAnswerField);
+  position: relative;
+  top: 0;
+  left: calc( 100% - var(--timer_width) );
+  right: 0;
+  font-size: 3em;
+  padding: 0.125em 0;
+  width: var(--timer_width);
+
+  margin-bottom: 0.125em;
+
+  background: var(--gradientBlue);
+  border: .125em rgb(188, 239, 246) solid;
+  box-shadow: inset 0.0125em .025em 0.25em rgb(88, 210, 255);
+  border-radius: 0.25em;
+}
+
+#fc_main_content
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+
+  height: 100%;
+  width: 100%;
+}
+
+#fc_container
+{
+  position: absolute;
+  width: fit-content;
+  margin: 0 auto;
+  height: 12em;
+}
+
+#fc_step_container
+{
+  display: flex;
+  font-size: 2em;
+  min-height: 3em;
+  flex-wrap: nowrap;
+  width: 90vw;
+  list-style-type: none;
+  padding: 0.25em 0.25em;
+  column-gap: 0.125em;
+
+  background: var(--gradientBlue);
+
+  border: .125em rgb(188, 239, 246) solid;
+  box-shadow: inset 0.0125em .025em 0.25em rgb(88, 210, 255);
+  border-radius: 0.25em;
+}
+
+.fc_step {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  
+  flex-direction: row;
+  text-align: center;
+
+  border: .125rem rgb(188, 239, 246) solid;
+  box-shadow: inset 0.0125rem .025rem 0.25rem rgb(88, 210, 255);
+  border-radius: 0.5rem;
+
+  color: #fff;
+}
+
+
+/******************************************
+*     Animation Keyframes
+******************************************/
+@keyframes timerPulse {
+  from {
+    box-shadow: 
+      0 0 0rem rgb(12, 118, 176),
+      inset 0.0125em .025em 0.25em rgb(88, 210, 255);
+  }
+  to {
+    box-shadow: 0 0 1.5rem rgb(52, 84, 163),
+    inset 0.0125em .025em 0.25em rgb(88, 210, 255);
+  }
+}
+
+
+@keyframes chaserGainStep {
+  from{
+    color: rgb(53, 16, 1);
+    background-color: transparent;
+    font-size: 0em;
+  }
+  to{
+    color: rgb(53, 16, 1);
+    background-color: rgb(224, 75, 34);
+    font-size: 1em;
+
+    border: .125rem rgb(255, 205, 154) solid;
+    box-shadow: 
+      inset 0.0125em .025em 0.5em rgb(255, 56, 42),
+      0 0 0.5em rgb(231, 2, 90)
+    ;
+  }
+}
+
+@keyframes chaserLoseStep {
+  from{
+    color: rgb(53, 16, 1);
+    background-color: rgb(224, 75, 34);
+    font-size: 1em;
+  }
+  to{
+    color: rgb(53, 16, 1);
+    background-color: transparent;
+    font-size: 0em;
+  }
+}
+
+@keyframes chaserPreviousStep {
+  from {
+    color: rgb(53, 16, 1);
+    background-color:rgb(224, 75, 34);
+    font-size: 1em;
+    
+    border: .125rem rgb(255, 205, 154) solid;
+    box-shadow: 
+      inset 0.0125em .025em 0.5em rgb(255, 56, 42),
+      0 0 0.5em rgb(231, 2, 90)
+    ;
+  }
+  to {
+    color: rgb(53, 16, 1);
+    background-color:rgb(194, 28, 6);
+    font-size: 0em;
+
+    border: .125rem rgb(206, 28, 4) solid;
+    box-shadow: 
+      inset 0.0125em .025em 0.5em rgb(245, 99, 37),
+      0 0 0.5em rgb(231, 82, 2)
+    ;
+  }
+}
+
+@keyframes chaserCaughtPlayers {
+  from {
+    box-shadow: 
+      0 0 3rem rgb(255, 94, 14),
+      inset 0.0125em .025em 0.5em rgb(255, 56, 42)
+    ;
+    border-color: rgb(255, 205, 154);
+  }
+  to {
+    box-shadow: 
+      0 0 3rem rgb(255, 40, 7),
+      inset 0.0125em .025em 0.5em rgb(255, 56, 42)
+    ;
+    border-color: rgb(255, 145, 120);
+  }
+}
+
+@keyframes playersWin {
+  from {
+    box-shadow: 0 0 2rem rgba(184, 230, 255, 0.417)
+  }
+  to {
+    box-shadow: 0 0 2rem rgba(88, 210, 255, 1);
+  }
+}
+
+
+@keyframes chaserPreviousStepPushback {
+  from {
+    background-color:rgb(227, 34, 66);
+    font-size: 0em;
+  }
+  to {
+    background-color: transparent;
+    font-size: 1em;
+  }
+
+}
+
+@keyframes playerGainStep {
+  from {
+    width: 0%;
+    min-width: 0%;
+    font-size: 0em;
+    background-color: #fff;
+  }
+  to {
+    width: 100%;
+    min-width: 2.5rem;
+    font-size: 1em;
+    background: rgb(87, 235, 255);
+    box-shadow: inset 0.0125em .025em 0.5em rgb(189, 255, 248);
+    color: rgb(35, 37, 98);
+  }
+}
+
+@keyframes playerBackStep {
+  from {
+    font-size: 0em;
+    background-color: #fff;
+  }
+  to {
+    font-size: 1em;
+    background: rgb(87, 235, 255);
+    box-shadow: inset 0.0125em .025em 0.5em rgb(189, 255, 248);
+    color: rgb(35, 37, 98);
+  }
+}
+
+@keyframes playerPreviousStep {
+  from{
+    background: rgb(87, 235, 255);
+    box-shadow: inset 0.0125em .025em 0.5em rgb(189, 255, 248);
+    color: rgb(35, 37, 98);
+    font-size: 1em;
+  }
+  to{
+    background: transparent;
+    color: #fff;
+    font-size: 0em;
+  }
+}
+
+@keyframes playerLoseStep {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+// For Background
+@keyframes bg_pulse {
+  from 
+  {
+    background-color: rgba(25, 27, 72, 0.701);
+    box-shadow: rgb(25, 27, 72);
+    transform: scale(1);
+  }
+  to
+  {
+    background-color: rgb(30, 37, 93);
+    box-shadow: 0 0 5vw rgba(25, 27, 72, 0.701);
+    transform: scale(0.6);
+  }
+}
+
+/******************************************
+*     Misc
+******************************************/
+.flex_centered 
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.special_text
+{
+  font-weight: 600;
+  cursor: pointer;
+  color: rgb(255, 32, 32);
+}
+
+#suggested_action
+{
+  position: absolute;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.05em; 
+  bottom: 2.5%;
+  left: 2.5%;
+  opacity: 0.2;
+  color: #fff;
+  cursor:default;
+}
+
+
+/******************************************
+*     Extra Frontend Stuff
+******************************************/
+
+
+.circle_button
+{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 1em;
+  border-radius: 100vw;
+  width: 1em;
+  height: 1em;
+  font: inherit;
+  cursor: pointer;
+  border: #fff solid 0.025em;
+  color: #fff;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  
+  opacity: 0.2;
+  transition: opacity 500ms, transform 500ms;
+}
+
+.modal_content
+{
+  width: 100%;
+  display: flex;
+}
+
+#settings_modal_button
+{
+  bottom: 2.5%;
+  right: 7.5%;
+}
+
+#help_modal_button
+{
+  bottom: 2.5%;
+  right: 2.5%;
+}
+
+#next_page_button
+{
+  top: 2.5%;
+  right: 2.5%;
+}
+#prev_page_button
+{
+  top: 2.5%;
+  left: 2.5%;
+}
+.page_triangle
+{
+  border-top: 0.5rem solid transparent;
+  border-bottom: 0.5rem solid transparent; 
+}
+.next_page
+{
+  border-left: 0.6rem solid #fff; 
+}
+.prev_page
+{
+  border-right: 0.6rem solid #fff; 
+}
+
+
+.circle_button:hover
+{
+  opacity: 1;
+  transform: scale(1.5);
+}
+.modal_container
+{
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  background-color: #01000999;
+  position: absolute;
+  
+  font-family: Arial, Helvetica, sans-serif;
+
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.modal
+{
+  background: var(--gradientBlue);
+  border: .25em rgb(188, 239, 246) solid;
+  border-radius: 0.25em;
+  font-size: 1.5em;
+  
+  --modal-width: 40%;
+  --modal-title-offset: 4em;
+
+  height: 60%;
+  width: var(--modal-width);
+  overflow-y: scroll;
+  color: #fff;
+}
+
+.modal_title
+{
+  text-align: center;
+  width: calc( var(--modal-width) - 2% );
+  height: fit-content;
+  position: fixed;
+  background: var(--gradientBlue);
+
+  h3, h6
+  {
+    text-align: center;
+    padding: 0.5em 0;
+  }
+  h6
+  {
+    font-weight: 400;
+    padding: 0.25em 0;
+  }
+}
+
+#settings_modal_list
+{
+  margin-top: 6rem;
+
+}
+
+#key_bindings_list 
+{
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  padding: 0.5em 0;
+  list-style-type: none;
+}
+
+.key_bindings_list_item
+{
+  box-shadow: inset 0.0125em .025em 0.25em rgb(88, 210, 255);
+  border-radius: 0.25em;
+  padding: 1em 0.5em;
+  font-size: 0.75em;
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+
+.special_text
+{
+  font-weight: 600;
+  cursor: pointer;
+  color: rgb(255, 32, 32);
+}
+
+#state_hint
+{
+  position: absolute;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.05em; 
+  bottom: 2.5%;
+  left: 2.5%;
+  opacity: 0.2;
+  color: #fff;
+  cursor:default;
+}
+
+#sfx_volume_sliders
+{
+  height: 1em;
+  padding: 1em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1rem;
+
+
+  position: absolute;
+  bottom: 2.5%;
+  left: 50%;
+  transform: translateX( -50% );
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0.2;
+}
+
+.volume_slider
+{
+  background: #fff;
+}
+
+
+/******************************************
+*     Animation Classes
+******************************************/
+.anim_timer_pulse
+{
+  animation-name: timerPulse;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
+  animation-delay: 0ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}
+.anim_player_previous_step
+{
+  animation-name: playerPreviousStep;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+
+.anim_player_gain_step
+{
+  animation-name: playerGainStep;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+} 
+
+.anim_player_back_step
+{
+  animation-name: playerBackStep;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  animation-direction: backwards;
+  animation-fill-mode: forwards;
+} 
+
+.anim_chaser_gain_step
+{
+  animation-name: chaserGainStep;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+
+.anim_chaser_lose_step
+{
+  animation-name: chaserLoseStep;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+
+.anim_chaser_previous_step
+{
+  animation-name: chaserPreviousStep;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+
+.anim_chaser_previous_step_pushback
+{
+  animation-name: chaserPreviousStepPushback;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+
+.anim_chaser_caught_players
+{
+  animation-name: chaserCaughtPlayers;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}
+
+.anim_players_win
+{
+  animation-name: playersWin;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}
+
+// for Background
+.anim_bg_pulse
+{
+  animation-name: bg_pulse;
+  animation-duration: var(--baseAnimationTime);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}
+
+/******************************************
+*     Background Graphics
+******************************************/
+#bg_container
+{
+  position: absolute;
+  z-index: -3;
+  top: 0;
+  left: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: hidden;
+  width: 100%;
+
+  filter: blur( 0.75vw );
+  --numberOfRows: 6;
+}
+.bg_row
+{
+  height: calc( 100% / var(--numberOfRows) );
+  gap: 0.75%;
+  display: flex;
+  justify-content: space-between;
+  margin: 1vh 0.5vw;
+}
+.bg_col
+{
+  --baseAnimationTime: 5s;
+  position: relative;
+  height: 15vh;
+  width: 7.5vw;
+  border-radius: 100vw;
+  background-color: rgb(25, 27, 72);
+}
+
+
+
