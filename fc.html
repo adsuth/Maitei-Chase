@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./css/all_style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
-    <link rel="shortcut icon" href="./meta/favicon.png" type="image/x-icon">
-    <title>Final Chase</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/all_style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <link rel="shortcut icon" href="./meta/favicon.png" type="image/x-icon">
+  <title>Final Chase</title>
 </head>
+
 <body style="display: none;">
 
   <style>
     /* To add a local font */
     @font-face {
       font-family: kenyanCoffee;
-      src:url("./fonts/kenyan_coffee.ttf");
+      src: url("./fonts/kenyan_coffee.ttf");
     }
 
-    html
-    {
+    html {
       /* Change name here */
       /* font-family: "Arial", sans-serif; */
       font-family: kenyanCoffee, sans-serif;
       /* Change this to change scale across entire site */
-      font-size: 1.5em; 
+      font-size: 1.5em;
     }
   </style>
-  
+
   <button id="next_page_button" class="circle_button">
     <div class="page_triangle next_page"></div>
   </button>
   <button id="prev_page_button" class="circle_button">
     <div class="page_triangle prev_page"></div>
   </button>
-  
+
   <section id="fc_main_content">
     <div id="fc_container">
       <text id="fc_timer">2:00</text>
@@ -44,7 +45,7 @@
   </section>
 
   <div id="sfx_volume_sliders">
-    
+
     <label for="sfx_volume">SFX</label>
     <input type="range" name="sfx_volume" id="sfx_volume" class="volume_slider" min="0" max="1" step="0.1">
     <label for="bgm_volume">BGM</label>
@@ -53,10 +54,10 @@
   </div>
 
   <div id="sfx">
-    <audio id="klaxon"      preload="auto"  src="./sounds/sfx/all_klaxon.mp3"></audio>
-    <audio id="stopClock"   preload="auto"  src="./sounds/sfx/fc_StopTheClock.mp3"></audio>
-    <audio id="pushback"    preload="auto"  src="./sounds/sfx/fc_Pushback.mp3"></audio>
-    
+    <audio id="klaxon" preload="auto" src="./sounds/sfx/all_klaxon.mp3"></audio>
+    <audio id="stopClock" preload="auto" src="./sounds/sfx/fc_StopTheClock.mp3"></audio>
+    <audio id="pushback" preload="auto" src="./sounds/sfx/fc_Pushback.mp3"></audio>
+
     <!-- duping these to play simultaneously -->
     <div id="chaserStep">
       <audio src="./sounds/sfx/fc_ChaserStep.mp3" preload="auto"></audio>
@@ -74,93 +75,17 @@
 
   <!-- all longer SFX -->
   <div id="bgm">
-    <audio id="finalOST"    preload="auto"  src="./sounds/bgm/fc_FinalChaseTheme.mp3"></audio>
-    <audio id="chaserCatch" preload="auto"  src="./sounds/bgm/all_ChaserCatch.mp3"></audio>
-    <audio id="playerWin"   preload="auto"  src="./sounds/bgm/all_PlayerWin.mp3"></audio>
-    <audio id="chaserEnter" preload="auto"  src="./sounds/bgm/all_ChaserWalkOn.mp3"></audio>
-    <audio id="chaseBegin"  preload="auto"  src="./sounds/bgm/all_TheChaseIsOn.mp3"></audio>
+    <audio id="finalOST" preload="auto" src="./sounds/bgm/fc_FinalChaseTheme.mp3"></audio>
+    <audio id="chaserCatch" preload="auto" src="./sounds/bgm/all_ChaserCatch.mp3"></audio>
+    <audio id="playerWin" preload="auto" src="./sounds/bgm/all_PlayerWin.mp3"></audio>
+    <audio id="chaserEnter" preload="auto" src="./sounds/bgm/all_ChaserWalkOn.mp3"></audio>
+    <audio id="chaseBegin" preload="auto" src="./sounds/bgm/all_TheChaseIsOn.mp3"></audio>
   </div>
 
-  
+  <!-- Disable background in background.js -->
+  <div id="bg_container"></div>
+  <!-- <script src="./js/all/background.js" defer></script> -->
 
-  <!-- #bg_container>.bg_row*11>.bg_col*20 -->
-
-  <div id="bg_container">
-    <div class="bg_row">
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-    </div>
-    <div class="bg_row">
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-    </div>
-    <div class="bg_row">
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-    </div>
-    <div class="bg_row">
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-    </div>
-    <div class="bg_row">
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-    </div>
-    <div class="bg_row">
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-      <div class="bg_col"></div>
-    </div>
-  </div>
-
-  
 
   <script src="./js/all/definitions.js" defer></script>
   <script src="./js/all/sfx.js" defer></script>
@@ -190,4 +115,5 @@
   <p id="state_hint">Player Round Unstarted. Press "Space" to begin</p>
   <script src="./js/fc/fc_help.js" defer></script>
 </body>
+
 </html>
