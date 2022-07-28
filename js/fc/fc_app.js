@@ -34,8 +34,9 @@ function resetGame()
 function startChaserRound()
 {
   TIMER.reset()
-  sfx_stopAllBGM( bgm )
+  TIMER.updateDisplay()
   sfx_playSFX( klaxon )
+  // sfx_stopAllBGM( bgm )
 
   STATE.isPlayerRound = false
   STATE.isChaserRound = true
@@ -58,23 +59,29 @@ function fc_gameOver( winner = "player" )
 
   STATE.fc_gameOver = true
   
-  sfx_stopAllBGM( bgm )
   
   TIMER.stop()
   timer.classList.remove( "anim_timer_pulse" )
-
+  
   if ( winner == "chaser" )
   {
+    sfx_stopAllBGM( bgm )
     sfx_playBGM( chaserCatch, bgm )
     playAnimation(
       steps,
       "anim_chaser_caught_players"
     )
+
     setStateHint( `Chaser wins! Press ${ formatKeyBindList( KEY_BINDS.resetGame.keys ) } to reset the game.` )
   }
   else if ( winner == "player" )
   {
-    sfx_playBGM( playerWin, bgm )
+    sfx_playSFX( klaxon_end )
+
+    KLAXON_PLAYER_WIN_TIMEOUT = setTimeout( () => {
+      sfx_playBGM( playerWin, bgm )
+    }, klaxon.duration * 500 ) 
+
     playAnimation(
       steps,
       "anim_players_win"
@@ -249,6 +256,7 @@ function playAnimation( element, animClass )
  ******************************************/
 function fc_initApp()
 {
+  sfx_stopAllBGM( bgm )
   timer.classList.remove( "anim_timer_pulse" )
 
   if ( steps.children.length < 1 ) { addStepToSteps() }
@@ -260,9 +268,13 @@ function fc_initApp()
     }, 2000 )
   }
 
+  clearInterval( KLAXON_PLAYER_WIN_TIMEOUT )
+  KLAXON_PLAYER_WIN_TIMEOUT = null
+
 }
 
 TIMER.timerEndCallback = startChaserRound
+
 STATE = getDefaultState()
 
 sfx_setVolume( bgm, BGM_VOLUME )

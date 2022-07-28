@@ -11,6 +11,7 @@ const CASH_ROLLING_INTERVAL_TIME = 25
 const CASH_ROLLING_MAX_LOOPS = 20
 
 var CB_THEME_STARTUP_TIMEOUT = null
+const BGM_TIMING_OFFSET = 1500
 
 var CASH_ROLLING_INTERVAL = null
 var STATE = {}
@@ -68,11 +69,12 @@ KEY_BINDS = {
       sfx_playBGM( theme, cb_bgm )
 
       if ( !TIMER.started ) {
-        CB_THEME_STARTUP_TIMEOUT = setTimeout( TIMER.toggle, 1500 )
+        CB_THEME_STARTUP_TIMEOUT = setTimeout( TIMER.toggle, BGM_TIMING_OFFSET )
         return
       }
       
       TIMER.toggle()
+      timer.classList.toggle( "anim_timer_pulse" )
 
       if ( TIMER.running ) { sfx_playBGM( theme, cb_bgm ) } 
       else { sfx_pauseBGM( theme ) } 

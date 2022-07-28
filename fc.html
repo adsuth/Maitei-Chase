@@ -39,7 +39,7 @@
 
   <section id="fc_main_content">
     <div id="fc_container">
-      <text id="fc_timer">2:00</text>
+      <text id="fc_timer"></text>
       <ul id="fc_step_container"></ul>
     </div>
   </section>
@@ -54,9 +54,12 @@
   </div>
 
   <div id="sfx">
+    <audio id="klaxon_final" preload="auto" src="./sounds/sfx/all_klaxon.mp3"></audio>
     <audio id="klaxon" preload="auto" src="./sounds/sfx/all_klaxon.mp3"></audio>
     <audio id="stopClock" preload="auto" src="./sounds/sfx/fc_StopTheClock.mp3"></audio>
     <audio id="pushback" preload="auto" src="./sounds/sfx/fc_Pushback.mp3"></audio>
+    <audio id="chaserCatch" preload="auto" src="./sounds/sfx/all_ChaserCatch.mp3"></audio>
+    <audio id="playerWin" preload="auto" src="./sounds/sfx/all_PlayerWin.mp3"></audio>
 
     <!-- duping these to play simultaneously -->
     <div id="chaserStep">
@@ -76,8 +79,6 @@
   <!-- all longer SFX -->
   <div id="bgm">
     <audio id="finalOST" preload="auto" src="./sounds/bgm/fc_FinalChaseTheme.mp3"></audio>
-    <audio id="chaserCatch" preload="auto" src="./sounds/bgm/all_ChaserCatch.mp3"></audio>
-    <audio id="playerWin" preload="auto" src="./sounds/bgm/all_PlayerWin.mp3"></audio>
     <audio id="chaserEnter" preload="auto" src="./sounds/bgm/all_ChaserWalkOn.mp3"></audio>
     <audio id="chaseBegin" preload="auto" src="./sounds/bgm/all_TheChaseIsOn.mp3"></audio>
   </div>

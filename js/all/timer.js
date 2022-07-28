@@ -17,17 +17,34 @@ class Timer {
 
     this.goBeyondRange = settings?.mins ?? false
     this.timerEndCallback = settings?.timerEndCallback ?? function() {}
+
+    this.delayCallback = settings?.delayCallback ?? function() {}
+    this.delayTimeout = null
+
+    this.delayed = settings?.delayed ?? false
+    this.delayFinished = null
     
     this.milliseconds = 0
     this.seconds = this.maxSeconds
     this.minutes = this.maxMinutes
+
+    this.updateDisplay()
   }
 
   start() {
+
+    if ( this.delayed && !this.delayFinished )
+    {
+      return this.delayCallback()
+    } 
+
+    this.updateDisplay()
+
     this.started = true
     this.running = true
 
     this.interval = setInterval( () => {
+      console.log( "among us" )
       this.update()
     }, this.INTERVAL_LENGTH )
   }
@@ -71,11 +88,19 @@ class Timer {
       clearInterval( this.interval )
       this.interval = null
     }
+
+    if ( this.delayed )
+    {
+      clearInterval( this.delayTimeout )
+      this.delayTimeout = null
+      this.delayFinished = null
+    }
     
     this.milliseconds = 0
+    this.updateDisplay()
+
     this.seconds = this.maxSeconds
     this.minutes = this.maxMinutes
-    this.updateDisplay()
   }
 
   /**
@@ -83,22 +108,25 @@ class Timer {
    * @param {Number} secs Seconds to be added to timer
    */
   addTime(secs = 2) {
+    this.milliseconds = 1000
     this.seconds += secs
     if (this.seconds > 59) {
       this.minutes++
       this.seconds %= 60
     }
-    if ( this.goBeyondRange && this.seconds > this.maxSeconds )
+
+    if ( this.goBeyondRange && this.seconds > this.maxSeconds && this.minutes == this.maxMinutes )
     {
-      this.seconds = this.maxSeconds
+      this.reset()
+      return this.start()
     }
 
     this.updateDisplay()
   }
 
   removeTime(secs = 2) {
+    this.milliseconds = 1000
     this.seconds -= secs
-    
     if ( this.seconds < 0 ) {
       this.minutes--
       this.seconds = 60 - Math.abs( this.seconds )
@@ -121,31 +149,32 @@ class Timer {
   update() {
     this.milliseconds -= this.INTERVAL_LENGTH
     
-    // time up
-    if (this.minutes <= 0 && this.seconds <= 0 && this.milliseconds <= 0) {
-      // end game
-      this.stop()
-      return this.timerEndCallback()
-    }
-
     // if a second has passed
     if ( this.milliseconds < 0 )
     {
       this.seconds--
       this.milliseconds = 1000
     }
-
+    
     // if a minute has passed
     if (this.seconds < 0) {
       this.minutes--
       this.seconds = 59
     }
-    this.updateDisplay()
-  }
 
+    this.updateDisplay()
+
+    // time up
+    if (this.minutes <= 0 && this.seconds <= 0) {
+      // end game
+      this.stop()
+      return this.timerEndCallback()
+    }
+  }
+  
   updateDisplay() {
     let displaySeconds = "" + this.seconds
-
+    
     // format if seconds too short
     if (this.seconds.toString().length < 2) {
       displaySeconds = "0" + displaySeconds
@@ -154,4 +183,21 @@ class Timer {
     document.getElementById( this.root ).innerHTML = 
       `${ this.minutes }:${displaySeconds}`
   }
-}
+
+  getRemainingTime()
+  {
+    return (
+      (this.minutes * 60) +
+      this.seconds +
+      (this.milliseconds / 1000)
+    )
+  }
+
+  getElapsedTime()
+  {
+    return (this.maxMinutes * 60) + this.maxSeconds - (
+      (this.minutes * 60) +
+      this.seconds 
+    )
+  }
+} 
