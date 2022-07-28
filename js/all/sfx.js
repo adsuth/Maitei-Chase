@@ -100,7 +100,6 @@ function sfx_muteSounds()
   {
     if ( element?.children.length > 0 )
     {
-      console.log( "???" )
       for ( let tag of element.children )
       {
         tag.volume = 0

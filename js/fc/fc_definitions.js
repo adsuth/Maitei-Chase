@@ -46,12 +46,10 @@ TIMER = new Timer( "fc_timer", {
   delayCallback: () => {
     if ( TIMER.delayTimeout || TIMER.delayFinished ) { return }
     
-    console.log(  "akgkaguew")
     TIMER.delayFinished = false
     sfx_playBGM( finalOST, bgm )
      
     TIMER.delayTimeout = setTimeout( () => {
-      console.log(  "fin")
   
       clearTimeout( TIMER.delayTimeout )
       TIMER.delayTimeout = null
@@ -135,8 +133,6 @@ KEY_BINDS = {
       if ( STATE.gameOver ) { return }
       if ( TIMER.delayed && TIMER.delayFinished === false ) { return }
 
-      console.log ( TIMER.running )
-      
       TIMER.toggle()
       timer.classList.toggle( "anim_timer_pulse" )
 

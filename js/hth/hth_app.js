@@ -136,8 +136,6 @@ function hth_setPrizeAmount( ev )
   let newValue = ev.value
   newValue = newValue.replace( /[^0-9.]/g, "" )
   
-  console.log( newValue )
-
   if ( parseFloat(newValue) *100 > MAX_CASH_PRIZE ) { newValue = MAX_CASH_PRIZE /100 }
   if ( isNaN( parseFloat(newValue) )  ) { newValue = GAME_STATE.prizeAmount }
 

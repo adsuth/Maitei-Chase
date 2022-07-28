@@ -44,7 +44,6 @@ class Timer {
     this.running = true
 
     this.interval = setInterval( () => {
-      console.log( "among us" )
       this.update()
     }, this.INTERVAL_LENGTH )
   }
