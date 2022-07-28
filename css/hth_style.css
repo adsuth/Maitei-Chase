@@ -181,9 +181,9 @@
 
 .board_chaser {
   background: var(--gradientRed);
-  border: 0.125em rgb(255, 32, 32) solid;
+  border: 0.125em #ff2020 solid;
   border-radius: 0.3em;
-  box-shadow: inset 0.0125em 0.025em 0.5em rgb(255, 56, 42), 0 0 0.5em rgb(231, 2, 90);
+  box-shadow: inset 0.0125em 0.025em 0.5em #ff382a, 0 0 0.5em #e7025a;
   text-shadow: 0.075em 0.075em 0 rgb(140, 11, 56);
 }
 

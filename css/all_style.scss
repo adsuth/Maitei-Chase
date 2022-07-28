@@ -268,11 +268,11 @@ button {
 @keyframes chaserPreviousStepPushback {
   from {
     background-color:rgb(227, 34, 66);
-    font-size: 0em;
+    font-size: 1em;
   }
   to {
     background-color: transparent;
-    font-size: 1em;
+    font-size: 0em;
   }
 
 }

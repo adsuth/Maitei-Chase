@@ -56,7 +56,7 @@ h2 {
 
 html {
   --gradientBG: linear-gradient( rgb(25, 27, 72), rgb(8, 8, 33) );
-  --gradientRed: linear-gradient( 270deg, rgb(224, 75, 34), rgb(227, 34, 66) );
+  --gradientRed: linear-gradient( 270deg, #e04b22, #e32242 );
   --gradientBlue: linear-gradient( 90deg, rgb(64, 26, 189), rgb(34, 105, 227) );
   --gradientAnswerField: linear-gradient( 90deg, rgb(50, 7, 149), rgb(7, 37, 123) );
 }
@@ -279,21 +279,21 @@ button {
 @-webkit-keyframes chaserPreviousStepPushback {
   from {
     background-color: rgb(227, 34, 66);
-    font-size: 0em;
+    font-size: 1em;
   }
   to {
     background-color: transparent;
-    font-size: 1em;
+    font-size: 0em;
   }
 }
 @keyframes chaserPreviousStepPushback {
   from {
     background-color: rgb(227, 34, 66);
-    font-size: 0em;
+    font-size: 1em;
   }
   to {
     background-color: transparent;
-    font-size: 1em;
+    font-size: 0em;
   }
 }
 @-webkit-keyframes playerGainStep {
