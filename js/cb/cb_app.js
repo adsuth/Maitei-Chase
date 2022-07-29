@@ -11,7 +11,7 @@ function cb_getDefaultState()
 
 function cb_timeUp()
 {
-  sfx_stopAllBGM( cb_bgm )
+  // sfx_stopAllBGM( cb_bgm )
   sfx_playSFX( klaxon )
   STATE.gameOver = true
 }

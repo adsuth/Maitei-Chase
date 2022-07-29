@@ -11,7 +11,8 @@ const CASH_ROLLING_INTERVAL_TIME = 25
 const CASH_ROLLING_MAX_LOOPS = 20
 
 var CB_THEME_STARTUP_TIMEOUT = null
-const BGM_TIMING_OFFSET = 1500
+const BGM_TIMING_OFFSET = 1805
+var BGM_OFFSET = false
 
 var CASH_ROLLING_INTERVAL = null
 var STATE = {}
@@ -70,8 +71,14 @@ KEY_BINDS = {
       
       timer.classList.toggle( "anim_timer_pulse" )
       
-      if ( !TIMER.started ) {
-        CB_THEME_STARTUP_TIMEOUT = setTimeout( TIMER.toggle, BGM_TIMING_OFFSET )
+      if ( !TIMER.started && !CB_THEME_STARTUP_TIMEOUT ) {
+        CB_THEME_STARTUP_TIMEOUT = setTimeout( () => {
+          TIMER.toggle()
+          BGM_OFFSET = true
+          clearTimeout( CB_THEME_STARTUP_TIMEOUT )
+          CB_THEME_STARTUP_TIMEOUT = null
+
+        }, BGM_TIMING_OFFSET )
         return
       }
       
@@ -107,8 +114,11 @@ KEY_BINDS = {
     description: "Grants an additional 10 seconds to the clock. ",
     action: () => {
       if ( STATE.gameOver ) { return }
-      theme.currentTime -= TIMER_INCREMENT
+      if ( CB_THEME_STARTUP_TIMEOUT ) { return }
+
       TIMER.addTime( TIMER_INCREMENT )
+      theme.currentTime = TIMER.getElapsedTime()
+    
     }
   },
   removeTime: {
@@ -116,8 +126,11 @@ KEY_BINDS = {
     description: "Removes 10 seconds from the clock. ",
     action: () => {
       if ( STATE.gameOver ) { return }     
-      theme.currentTime += TIMER_INCREMENT
+      if ( CB_THEME_STARTUP_TIMEOUT ) { return }
+      
       TIMER.removeTime( TIMER_INCREMENT )
+      theme.currentTime = TIMER.getElapsedTime()
+      
     } 
   },
 }
