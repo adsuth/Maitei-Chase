@@ -17,12 +17,6 @@ class Timer {
 
     this.goBeyondRange = settings?.mins ?? false
     this.timerEndCallback = settings?.timerEndCallback ?? function() {}
-
-    this.delayCallback = settings?.delayCallback ?? function() {}
-    this.delayTimeout = null
-
-    this.delayed = settings?.delayed ?? false
-    this.delayFinished = null
     
     this.milliseconds = 0
     this.seconds = this.maxSeconds
@@ -32,12 +26,6 @@ class Timer {
   }
 
   start() {
-
-    if ( this.delayed && !this.delayFinished )
-    {
-      return this.delayCallback()
-    } 
-
     this.updateDisplay()
 
     this.started = true

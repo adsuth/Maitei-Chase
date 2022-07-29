@@ -66,7 +66,7 @@ function fc_gameOver( winner = "player" )
   if ( winner == "chaser" )
   {
     sfx_stopAllBGM( bgm )
-    sfx_playBGM( chaserCatch, bgm )
+    sfx_playSFX( chaserCatch )
     playAnimation(
       steps,
       "anim_chaser_caught_players"
@@ -79,7 +79,7 @@ function fc_gameOver( winner = "player" )
     sfx_playSFX( klaxon_end )
 
     KLAXON_PLAYER_WIN_TIMEOUT = setTimeout( () => {
-      sfx_playBGM( playerWin, bgm )
+      sfx_playSFX( playerWin )
     }, klaxon.duration * 500 ) 
 
     playAnimation(

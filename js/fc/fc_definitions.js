@@ -42,22 +42,6 @@ TIMER = new Timer( "fc_timer", {
   mins: 2,
   secs: 0,
   timerEndCallback: null,
-  delayed: true,
-  delayCallback: () => {
-    if ( TIMER.delayTimeout || TIMER.delayFinished ) { return }
-    
-    TIMER.delayFinished = false
-    sfx_playBGM( finalOST, bgm )
-     
-    TIMER.delayTimeout = setTimeout( () => {
-  
-      clearTimeout( TIMER.delayTimeout )
-      TIMER.delayTimeout = null
-      TIMER.delayFinished = true
-  
-      TIMER.toggle()
-    }, BGM_TIMING_OFFSET )
-  }
 } )
 
 /******************************************
@@ -130,15 +114,17 @@ KEY_BINDS = {
     keys: [ " ", "Space" ],
     description: "Toggles the timer; turns on or off",
     action: () => { 
-      if ( STATE.gameOver ) { return }
+      if ( STATE.fc_gameOver ) { return }
       if ( TIMER.delayed && TIMER.delayFinished === false ) { return }
-
+      
       TIMER.toggle()
       timer.classList.toggle( "anim_timer_pulse" )
 
       if ( TIMER.running ) { sfx_playBGM( finalOST, bgm ) } 
-      else if ( TIMER.delayed && TIMER.delayFinished === false ) { sfx_playBGM( finalOST, bgm ) }
-      else if ( !TIMER.running ) { sfx_pauseBGM( finalOST, bgm ) }
+      else { 
+        sfx_playSFX( stopClock )
+        sfx_pauseBGM( finalOST, bgm ) 
+      }
       
     }
   },

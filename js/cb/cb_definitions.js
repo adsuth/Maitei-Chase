@@ -1,5 +1,5 @@
 const cash    = document.getElementById("cb_cash")
-const time    = document.getElementById("cb_timer")
+const timer    = document.getElementById("cb_timer")
 
 const cb_bgm = document.getElementById("bgm")
 const theme   = document.getElementById("theme")
@@ -67,14 +67,15 @@ KEY_BINDS = {
       if ( STATE.gameOver ) { return }
       
       sfx_playBGM( theme, cb_bgm )
-
+      
+      timer.classList.toggle( "anim_timer_pulse" )
+      
       if ( !TIMER.started ) {
         CB_THEME_STARTUP_TIMEOUT = setTimeout( TIMER.toggle, BGM_TIMING_OFFSET )
         return
       }
       
       TIMER.toggle()
-      timer.classList.toggle( "anim_timer_pulse" )
 
       if ( TIMER.running ) { sfx_playBGM( theme, cb_bgm ) } 
       else { sfx_pauseBGM( theme ) } 

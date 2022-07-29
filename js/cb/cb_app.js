@@ -66,6 +66,8 @@ function cb_init()
   STATE = cb_getDefaultState()
 
   TIMER.reset()
+  TIMER.updateDisplay()
+  
   cb_updateCash( amount = 0 )
   TIMER.timerEndCallback = cb_timeUp
   cb_setPrizeAmount()
