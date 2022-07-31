@@ -9,6 +9,7 @@ function hth_getQuestion() {
   }
 
   QUESTION = QUESTION_SET.shift()
+  sessionStorage.setItem( "QUESTIONS", JSON.stringify( QUESTION_SET ) )
 }
 
 /**
@@ -19,6 +20,13 @@ function hth_getQuestion() {
  * If this fails, the program will not start.
  */
 function hth_getCSV() {
+  
+  if ( sessionStorage.getItem( "QUESTIONS" ) )
+  {
+    QUESTION_SET = JSON.parse( sessionStorage.getItem( "QUESTIONS" ) )
+  }
+  if ( QUESTION_SET.length > 0 ) { return hth_nextQuestion( true ) }
+
   d3.csv( QUESTIONS_CSV_PATH, ( data ) => {
     return {
       question: data.question, 
@@ -40,8 +48,15 @@ function hth_getCSV() {
       {
         QUESTION_SET.unshift( entry )
       }
+
+      console.table( {
+        random: QUESTION_SET[ QUESTION_SET.length - 1 ], 
+        current: entry
+      } )
     }
 
+    
+    sessionStorage.setItem( "QUESTIONS", JSON.stringify( QUESTION_SET ) )
     hth_nextQuestion( true )
   })
 }
