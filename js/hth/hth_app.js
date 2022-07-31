@@ -49,10 +49,6 @@ function hth_getCSV() {
         QUESTION_SET.unshift( entry )
       }
 
-      console.table( {
-        random: QUESTION_SET[ QUESTION_SET.length - 1 ], 
-        current: entry
-      } )
     }
 
     
