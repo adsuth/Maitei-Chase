@@ -164,6 +164,13 @@ KEY_BINDS = {
     description: "Resets the entire game including the board, player names, questions...",
     action: () => hth_initApp()
   },
+  skipQuestion: {
+    keys: [ "Backspace" ],
+    description: "Skips the current question",
+    action: () => {
+      hth_nextQuestion( true )
+    }
+  },
 
   /******************************************
   *     Sounds

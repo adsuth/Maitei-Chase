@@ -123,8 +123,11 @@ function hth_nextQuestion( isFirstQuestion = false )
 {
   if ( GAME_STATE.gameOver ) { return }
   
+  sfx_stopAllBGM(bgm)
+
   if ( isFirstQuestion )
   {
+
     hth_hideAnswerFields()
     hth_hideQuestion()
     hth_hideBuzzIns()
