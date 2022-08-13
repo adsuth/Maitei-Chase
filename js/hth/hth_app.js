@@ -12,6 +12,24 @@ function hth_getQuestion() {
   sessionStorage.setItem( "QUESTIONS", JSON.stringify( QUESTION_SET ) )
 }
 
+function hth_shuffleArray(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
 /**
  * Retrieves locally stored CSV of questions.
  * Change path in ./definitions.js 
@@ -38,19 +56,7 @@ function hth_getCSV() {
   }, ( error, rows ) => {
     if ( error ){ return console.error( error.message ) }
 
-    for ( let entry of rows )
-    {
-      if ( Math.random() < .5 )
-      {
-        QUESTION_SET.push( entry )
-      }
-      else
-      {
-        QUESTION_SET.unshift( entry )
-      }
-
-    }
-
+    QUESTION_SET = hth_shuffleArray( rows )
     
     sessionStorage.setItem( "QUESTIONS", JSON.stringify( QUESTION_SET ) )
     hth_nextQuestion( true )
