@@ -196,6 +196,16 @@
     0 0 0.5em rgb(139, 2, 0);
 
 }
+.prev_player
+{
+  background: rgb(18, 36, 107);
+  border: .125em rgb(18, 36, 107) solid;
+  border-radius: 0.3em;
+  box-shadow: 
+    inset 0.0125em .025em 0.5em rgb(18, 36, 107),
+    0 0 0.5em rgb(18, 36, 107);
+
+}
 .chaser_triangle
 {
   border-top: 1rem solid transparent;

@@ -494,6 +494,7 @@ function hth_updateBoard()
     let step = board.children[ i ]
 
     step.classList.remove( "prev_chaser" )
+    step.classList.remove( "prev_player" )
     step.classList.remove( "board_chaser" )
     step.classList.remove( "board_player" )
 
@@ -505,6 +506,10 @@ function hth_updateBoard()
     if ( i < GAME_STATE.chaserPosition )
     {
       step.classList.add( "prev_chaser" )
+    }
+    if ( i < GAME_STATE.playerPosition && i > GAME_STATE.chaserPosition )
+    {
+      step.classList.add( "prev_player" )
     }
     if ( i == GAME_STATE.playerPosition )
     {
