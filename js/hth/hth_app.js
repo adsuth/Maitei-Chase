@@ -56,7 +56,7 @@ function hth_getCSV() {
   }, ( error, rows ) => {
     if ( error ){ return console.error( error.message ) }
 
-    QUESTION_SET = hth_shuffleArray( rows )
+    QUESTION_SET = rows
     
     sessionStorage.setItem( "QUESTIONS", JSON.stringify( QUESTION_SET ) )
     hth_nextQuestion( true )
