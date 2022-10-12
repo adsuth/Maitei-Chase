@@ -133,4 +133,24 @@ KEY_BINDS = {
       
     } 
   },
+  resetTimeLog: {
+    keys: [ "t" ],
+    description: "Reset timer back to the saved time log. ",
+    action: () => {
+      TIMER.setTime( timeLog )
+      if ( TIMER.running )
+      {
+        timer.classList.toggle( "anim_timer_pulse" )
+        TIMER.stop()
+      }
+
+      theme.currentTime = TIMER.getElapsedTime()
+
+      if ( STATE.cb_gameOver ) { return }
+      if ( TIMER.delayed && TIMER.delayFinished === false ) { return }
+      
+
+      sfx_pauseBGM( theme, bgm ) 
+    }
+  }
 }

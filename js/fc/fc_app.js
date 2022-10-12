@@ -18,6 +18,7 @@ function getDefaultState()
 
 function resetGame()
 {
+  timeLog = TIMER.getMaxTime()
   TIMER.reset()
   sfx_stopAllBGM( bgm )
 
@@ -161,6 +162,7 @@ function addStep() {
 
 function addStepToSteps()
 {
+  logCurrentTime()
   STATE.playerScore++;
   steps.appendChild( createStepNode() )
 }
@@ -198,6 +200,7 @@ function chaser_addStep() {
   } 
 
   STATE.chaserScore++
+  logCurrentTime()
 
   playAnimation(
     steps.children[STATE.chaserScore - 1],
@@ -239,6 +242,10 @@ function chaser_removeStep() {
       
 }
 
+function logCurrentTime() {
+  timeLog = TIMER.getTime()
+}
+
 function playAnimation( element, animClass )
 {
   for ( let cssClass of element.classList )
@@ -274,6 +281,7 @@ function fc_initApp()
 }
 
 TIMER.timerEndCallback = startChaserRound
+timeLog = TIMER.getMaxTime()
 
 STATE = getDefaultState()
 

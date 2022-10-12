@@ -37,6 +37,7 @@ function cb_addCash()
   }, CASH_ROLLING_INTERVAL_TIME )
 
   STATE.totalCash += 250
+  timeLog = TIMER.getTime()
   cb_setPrizeAmount()
 
 }
@@ -65,6 +66,7 @@ function cb_init()
 {
   STATE = cb_getDefaultState()
 
+  timeLog = TIMER.getMaxTime()
   TIMER.reset()
   TIMER.updateDisplay()
   
@@ -78,5 +80,7 @@ function cb_init()
 
 sfx_setVolume( bgm, BGM_VOLUME )
 sfx_setVolume( sfx, SFX_VOLUME )
+
+timeLog = TIMER.getMaxTime()
 
 cb_init()

@@ -15,6 +15,7 @@ var KEY_BINDS = {}
 
 var TIMER = null
 const TIMER_INCREMENT = 10
+var timeLog = {}
 
 var MODAL_SHOWN = false
 var FADE_DURATION = 0

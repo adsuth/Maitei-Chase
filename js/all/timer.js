@@ -187,4 +187,32 @@ class Timer {
       this.seconds 
     )
   }
+
+  getTime()
+  {
+    return {
+      minutes: this.minutes,
+      seconds: this.seconds,
+      milliseconds: this.milliseconds
+    }
+  }
+
+  getMaxTime()
+  {
+    return {
+      minutes: this.maxMinutes,
+      seconds: this.maxSeconds,
+      milliseconds: 0
+    }
+    this.update()
+  }
+
+  setTime( time = {} )
+  {
+    this.minutes      = time?.minutes      ?? this.minutes
+    this.seconds      = time?.seconds      ?? this.seconds
+    this.milliseconds = time?.milliseconds ?? this.milliseconds
+
+    this.update()
+  }
 } 

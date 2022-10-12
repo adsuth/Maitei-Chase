@@ -32,6 +32,7 @@ var GET_STATE_HINT_PROCESS = null
 
 var KLAXON_PLAYER_WIN_TIMEOUT = null
 
+
 // var FC_THEME_STARTUP_TIMEOUT = null
 
 /******************************************
@@ -183,10 +184,30 @@ KEY_BINDS = {
   description: "Skips current round. ",
   action: () => {
     sfx_stopAllBGM( bgm )
-   
 
     TIMER.timerEndCallback()
     }
   },
+  resetTimeLog: {
+    keys: [ "t" ],
+    description: "Reset timer back to the saved time log. ",
+    action: () => {
+      TIMER.setTime( timeLog )
+      if ( TIMER.running )
+      {
+        timer.classList.toggle( "anim_timer_pulse" )
+        TIMER.stop()
+      }
+
+      finalOST.currentTime = TIMER.getElapsedTime()
+
+      if ( STATE.fc_gameOver ) { return }
+      if ( TIMER.delayed && TIMER.delayFinished === false ) { return }
+      
+      timer.classList.toggle( "anim_timer_pulse" )
+
+      sfx_pauseBGM( finalOST, bgm ) 
+    }
+  }
 
 }
