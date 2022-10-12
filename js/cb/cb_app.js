@@ -13,6 +13,7 @@ function cb_timeUp()
 {
   // sfx_stopAllBGM( cb_bgm )
   sfx_playSFX( klaxon )
+  sfx_stopBGM( theme )
   STATE.gameOver = true
 }
 
@@ -74,8 +75,9 @@ function cb_init()
   TIMER.timerEndCallback = cb_timeUp
   cb_setPrizeAmount()
 
-  sa_updateSuggestedAction( KEY_BINDS.ToggleTimer )
+  timer.classList.remove( "anim_timer_pulse" )
 
+  sa_updateSuggestedAction( KEY_BINDS.ToggleTimer )
 }
 
 sfx_setVolume( bgm, BGM_VOLUME )

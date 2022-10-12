@@ -204,7 +204,7 @@ KEY_BINDS = {
       if ( STATE.fc_gameOver ) { return }
       if ( TIMER.delayed && TIMER.delayFinished === false ) { return }
       
-      timer.classList.toggle( "anim_timer_pulse" )
+      timer.classList.remove( "anim_timer_pulse" )
 
       sfx_pauseBGM( finalOST, bgm ) 
     }

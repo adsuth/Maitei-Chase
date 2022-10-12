@@ -28,6 +28,8 @@ function resetGame()
   
   steps.innerHTML = ""
   steps.className = ""
+
+  timer.classList.remove( "anim_timer_pulse" )
   
   fc_initApp()
 }

@@ -140,7 +140,7 @@ KEY_BINDS = {
       TIMER.setTime( timeLog )
       if ( TIMER.running )
       {
-        timer.classList.toggle( "anim_timer_pulse" )
+        timer.classList.remove( "anim_timer_pulse" )
         TIMER.stop()
       }
 
